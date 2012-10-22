@@ -1,0 +1,39 @@
+<head>
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.min.js'></script>
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+<script type='text/javascript' src='jQSlide.js'></script>
+</head>
+<body>
+<h1>Example of simple slide show using jQSlide</h1>
+<div class="slide-show" width="400px" height="300px" style="display:none">   <!-- display = None to hide slide show if javascript is disabled !-->
+        <a href="#" class="slide active first" width="400" height="300px">   
+            <img src="images1.jpeg" width="400" height="300px"/>                  
+        </a>                                                                                   
+                                                                                               
+        <a href="#" class="slide" width="400" height="300px">
+            <img src="images2.jpg"  width="400" height="300px"/>
+        </a>
+        
+        <img src="images3.jpg" class="slide" width="400px" height="300px"/>
+        
+        <div class="slide" width="400px" height="300px">
+            <img src="images4.jpg"/>
+        </div>
+
+        <div class="slide"  width="400" height="300px">
+            <p> Some text with image here here</p>
+            <img src="images5.jpg" width="400" height="300" style="margin-top:-40px"/>
+        </div>
+        <img src="images6.jpg" class="slide" width="400px" height="300px"/>
+
+        <a href="#" class="slide last"  width="400px" height="300px">
+            <img src="images7.jpg"  width="400" height="300px"/>
+        </a>
+</div>
+<script type="text/javascript">
+$(function(){
+    $('.slide-show').SlideShow({'timeout' : 5000});
+});
+</script>
+</body>
+
