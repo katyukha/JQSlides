@@ -21,6 +21,7 @@
             slideshow.find('.slide').not(".active").hide();
             var wrapper = slideshow.wrap("<div class='jQSlide-wrapper'>").parent();
 
+            // function that do all
             var do_slideshow = function(){
                 slideshow.find(".slide.active").fadeOut("fast", function(){
                     var active = $(slideshow).find(".slide.active");
@@ -35,11 +36,13 @@
 
             var interval_id = setInterval(do_slideshow, settings.timeout);            
 
+            // Controlls for slider.
             if(settings.control_panel.length>0){
-               var cp = wrapper.append("<div class='control-panel'></div>").find('.control-panel');
+               var cp = wrapper.append("<div class='control-panel'></div>").find('.control-panel').css('display','inline');
                for(x in settings.control_panel){
                    var btn = settings.control_panel[x];
-                   if(btn=='pause'){
+                   
+                   if(btn=='pause'){  // adding pause button
                        cp.append("<div class='button pause'>II</div>").find('.button.pause').click(function(){
                            if(!slideshow.hasClass('paused')){
                                slideshow.addClass('paused');
@@ -51,6 +54,31 @@
                                this.innerHTML = "II";
                            }
                        });
+                       continue;
+                   }
+                   if(btn=='next'){  // adding next button
+                       cp.append("<div class='button next'>&#4;</div>").find('.button.next').click(function(){
+                           clearInterval(interval_id);
+                           do_slideshow();
+                           interval_id = setInterval(do_slideshow, settings.timeout);
+                       });
+                       continue;
+                   }
+                   if(btn=='prev'){  // adding prev button
+                       cp.append("<div class='button prev'>&#2;</div>").find('.button.prev').click(function(){
+                           clearInterval(interval_id);
+                           slideshow.find(".slide.active").fadeOut("fast", function(){
+                               var active = $(slideshow).find(".slide.active");
+                               active.removeClass("active");
+                               if (active.hasClass("first")){
+                                   slideshow.find(".slide.last").addClass("active").fadeIn("slow");
+                               }else{
+                                   active.prev('.slide').addClass("active").fadeIn("slow");
+                               }
+                           });
+                           interval_id = setInterval(do_slideshow, settings.timeout);
+                       });
+                       continue;
                    }
                } 
             }
